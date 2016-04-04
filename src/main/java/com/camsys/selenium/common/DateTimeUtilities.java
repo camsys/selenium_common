@@ -3,7 +3,7 @@
  * 
  * @author mswanton
  */
-package common;
+package com.camsys.selenium.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

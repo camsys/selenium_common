@@ -9,7 +9,7 @@
  * @author mswanton
  */
 
-package common;
+package com.camsys.selenium.common;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

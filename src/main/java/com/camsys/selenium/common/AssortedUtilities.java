@@ -1,4 +1,4 @@
-package common;
+package com.camsys.selenium.common;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

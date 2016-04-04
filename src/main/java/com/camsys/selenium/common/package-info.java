@@ -5,4 +5,4 @@
  * @author mswanton
  *
  */
-package common;
+package com.camsys.selenium.common;

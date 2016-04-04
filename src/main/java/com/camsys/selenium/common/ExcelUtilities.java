@@ -4,7 +4,7 @@
  * @author mswanton
  */
 
-package common;
+package com.camsys.selenium.common;
 
 import java.io.FileInputStream;
 import java.io.IOException;

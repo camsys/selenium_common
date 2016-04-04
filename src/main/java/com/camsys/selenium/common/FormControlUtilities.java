@@ -1,4 +1,4 @@
-package common;
+package com.camsys.selenium.common;
 
 import java.util.List;
 

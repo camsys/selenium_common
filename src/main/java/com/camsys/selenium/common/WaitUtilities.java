@@ -1,7 +1,7 @@
 /**
  * This class contains utility methods relating to waiting.
  */
-package common;
+package com.camsys.selenium.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +23,17 @@ public class WaitUtilities {
 	}
 	
 	/**
+	 * Waits for a given element to not be visible
+	 * 
+	 * @param driver WebDriver instance
+	 * @param locator By of the element to wait for
+	 */
+	public static void waitForElementNotVisible(WebDriver driver, By locator){
+	    WebDriverWait wait = new WebDriverWait(driver, 60);
+	    Boolean visible = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+	}
+	
+	/**
 	 * Waits for a given element to be visible
 	 * 
 	 * @param driver WebDriver instance
@@ -32,6 +43,7 @@ public class WaitUtilities {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		WebElement element = wait.until(ExpectedConditions.visibilityOf(e));
 	}
+
 	
 	/**
 	 * Waits for a given element to be selected
