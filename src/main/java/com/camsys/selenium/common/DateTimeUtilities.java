@@ -18,11 +18,25 @@ public class DateTimeUtilities {
 	 * 
 	 * @return current date in MM/DD/YYYY format
 	 */
-	public static String getCurrentDate(){
+	public static String getCurrentDateMMDDYYYY(){
 		Date date = new Date();
 		
 		SimpleDateFormat MM_DD_YYYY_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
 		String currentDate = MM_DD_YYYY_FORMAT.format(date);
+		
+		return currentDate;
+	}
+	
+	/**
+	 * Gets current date.
+	 * 
+	 * @return current date in YYYY-MM-DD format
+	 */
+	public static String getCurrentDateYYYYMMDD(){
+		Date date = new Date();
+		
+		SimpleDateFormat YYYY_MM_DD_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String currentDate = YYYY_MM_DD_FORMAT.format(date);
 		
 		return currentDate;
 	}

@@ -8,7 +8,9 @@ package com.camsys.selenium.common;
 
 import java.util.ArrayList;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class CommonVerifications {
@@ -42,5 +44,12 @@ public class CommonVerifications {
         				  "Expected: " + title + ", Actual: " + driver.getTitle());
     }
     
+    public static void checkElementVisible(WebDriver driver, By locator, String message){
+    	Assert.assertTrue(driver.findElement(locator).isDisplayed(), message);
+    }
+    
+    public static void checkElementVisible(WebDriver driver, WebElement e, String message){
+    	Assert.assertTrue(e.isDisplayed(), message);
+    }
     
 }
