@@ -48,7 +48,7 @@ public class DateTimeUtilities {
 	 * Some error checking should probably happen to make data errors more 
 	 * informative.
 	 * 
-	 * @param date date to be changed
+	 * @param date date to be changed in MM/dd/yyyy format
 	 * @return date after being advanced/rolled back given number of days
 	 */
 	public static String changeDate(String date, int numDays){
@@ -61,8 +61,22 @@ public class DateTimeUtilities {
 		int newYear = year;
 		int[] newDateParts = {newMonth, newDay, newYear};
 		newDateParts = shiftDay(newDateParts);
+		String newMonthString;
+		String newDayString;
+		if(newDateParts[0] < 10){
+			newMonthString = "0" + newDateParts[0];
+		}
+		else{
+			newMonthString = "" + newDateParts[0];
+		}
+		if(newDateParts[1] < 10){
+			newDayString = "0" + newDateParts[1];
+		}
+		else{
+			newDayString = "" + newDateParts[1];
+		}
 		Log.debug("New Date Parts: " + Arrays.toString(newDateParts));
-		String newDate = newDateParts[0] + "/" + newDateParts[1] + "/" + newDateParts[2];
+		String newDate = newMonthString + "/" + newDayString + "/" + newDateParts[2];
 		return newDate;
 	}
 	
@@ -113,6 +127,119 @@ public class DateTimeUtilities {
 			return 31;
 		}
 	}
+	
+	/**
+	 * Get the date of the next weekday after the given date.
+	 * 
+	 * @param date date in MM/dd/yyyy format
+	 * @return the date of the next weekday
+	 */
+	public static String getNextWeekday(String date){
+    	String dayOfWeek = getDayOfWeek(date);
+    	int toShift = 0;
+    	switch(dayOfWeek){
+    	case "Friday":
+    		toShift = 3;
+    		break;
+    	case "Saturday":
+    		toShift = 2;
+    		break;
+		default:
+			toShift = 1;
+			break;
+    	}
+    	return DateTimeUtilities.changeDate(date, toShift);
+    }
+	
+	/**
+	 * Get the date of the next Saturday after the given date.
+	 * 
+	 * @param date date in MM/dd/yyyy format
+	 * @return the date of the next Saturday
+	 */
+	public static String getNextSaturday(String date){
+    	String dayOfWeek = getDayOfWeek(date);
+    	int toShift = 0;
+    	switch(dayOfWeek){
+    	case "Sunday":
+    		toShift = 6;
+    		break;
+    	case "Monday":
+    		toShift = 5;
+    		break;
+    	case "Tuesday":
+    		toShift = 4;
+    		break;
+    	case "Wednesday":
+    		toShift = 3;
+    		break;
+    	case "Thursday":
+    		toShift = 2;
+    		break;
+    	case "Friday":
+    		toShift = 1;
+    		break;
+    	default: // Saturday
+    		toShift = 7;
+    		break;
+    	}
+    	return DateTimeUtilities.changeDate(date, toShift);
+    }
+	
+	/**
+	 * Get the date of the next Sunday after the given date.
+	 * 
+	 * @param date date in MM/dd/yyyy format
+	 * @return the date of the next Sunday
+	 */
+	public static String getNextSunday(String date){
+    	String dayOfWeek = getDayOfWeek(date);
+    	int toShift = 0;
+    	switch(dayOfWeek){
+    	case "Monday":
+    		toShift = 6;
+    		break;
+    	case "Tuesday":
+    		toShift = 5;
+    		break;
+    	case "Wednesday":
+    		toShift = 4;
+    		break;
+    	case "Thursday":
+    		toShift = 3;
+    		break;
+    	case "Friday":
+    		toShift = 2;
+    		break;
+    	case "Saturday":
+    		toShift = 1;
+    		break;
+    	default: // Sunday
+    		toShift = 7;
+    		break;
+    	}
+    	return DateTimeUtilities.changeDate(date, toShift);
+    }
+	
+	/**
+	 * Get the day of week of a date
+	 * 
+	 * @param date date as a string in MM/dd/yyyy format
+	 * @return day of week
+	 */
+	public static String getDayOfWeek(String date){  	
+    	SimpleDateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date1 = null;
+		try{
+			date1 = inputFormat.parse(date);
+		}
+		catch(Exception e){
+			Log.error("Error parsing Date");
+		}
+		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+		String dayOfWeek = dayFormat.format(date1);
+		return dayOfWeek;
+    }
 
 	/**
 	 * Get the current time in hh:mm am/pm format.
